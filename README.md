@@ -56,7 +56,7 @@ $i18n->t('deeper.key'); // "Depp value"
 
 Simply enter your project directory and run
 
-`composer require pkly/i18next-php`
+`composer require alpakaio/i18next-php`
 
 ### Todo
 
@@ -64,8 +64,4 @@ Simply enter your project directory and run
 
 #### Packagist
 
-Visit the page [here](https://packagist.org/packages/pkly/i18next-php)
-
-#### Donate
-
-If you want feel free to buy me a coffee [by clicking here](https://paypal.me/pklytastic?locale.x=en_US)
+Visit the page [here](https://packagist.org/packages/alpakaio/i18next-php)
