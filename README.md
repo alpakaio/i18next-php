@@ -38,7 +38,7 @@ $i18n = new I18n([
         'en'        =>  [
             'translation'       =>  [
                 'key'           =>  'Value',
-                'key_plural'    =>  'Value plural'
+                'key_plural'    =>  'Value plural',
                 'deeper'        =>  [
                     'key'           =>  'Deep value'
                 ]
