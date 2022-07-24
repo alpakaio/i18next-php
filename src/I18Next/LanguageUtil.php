@@ -104,9 +104,6 @@ class LanguageUtil {
                 }, $p);
             }
             else if (count($p) === 2) {
-                $p[0] = mb_strtolower($p[0]);
-                $p[1] = mb_strtolower($p[1]);
-
                 if (in_array(mb_strtolower($p[1]), $specialCases))
                     $p[1] = Utils\capitalize(mb_strtolower($p[1]));
             }
