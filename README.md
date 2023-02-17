@@ -15,7 +15,7 @@ If you find any issues please report them or create a PR.
 * PSR3 logging support (psr/log is a hard requirement, but you're not required to actually use a logger)
 * Extremely similar API to the JS version
 * PHP-specific features like interfaces for modules
-* PHP 7.3+ 
+* PHP 8.0+ 
 * Automatic language detection support
 
 ### Usage
