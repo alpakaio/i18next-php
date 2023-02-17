@@ -25,6 +25,7 @@ If you find any issues please report them or create a PR.
 * [Basic shared usage through the whole application](examples/example-shared.php)
 * [Basic instancing of translation and separation from shared](examples/example-instance.php)
 * [Basic plural handling](examples/example-plurals.php)
+* [Multi plural handling](examples/example-multi-plurals.php)
 * [Basic language detection](examples/example-detect.php)
 
 ### Basic example
