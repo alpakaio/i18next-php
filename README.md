@@ -57,7 +57,7 @@ $i18n->t('deeper.key'); // "Depp value"
 
 Simply enter your project directory and run
 
-`composer require alpakaio/i18next-php`
+`composer require it-tem-papa/i18next-php`
 
 ### Todo
 
