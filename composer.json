@@ -6,12 +6,6 @@
         "translation"
     ],
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Pawel Kakol [Ly]",
-            "email": "kakolp95@gmail.com"
-        }
-    ],
     "type": "project",
     "require": {
 		"php": ">=8.0",
