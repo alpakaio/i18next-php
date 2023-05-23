@@ -12,33 +12,60 @@ I18n::get([
     'resources'             =>  [
         'uk'                =>  [
             'translation'       =>  [
-                'key_0'        =>  'Single form in Ukrainian',
-                'key_1'        =>  'Plural form in Ukrainian',
-                'key_2'        =>  'Other plural form in Ukrainian',
+                'key_one'        =>  'Single form in Ukrainian',
+                'key_few'        =>  'Plural form \'few\' in Ukrainian',
+                'key_many'        =>  'Plural form \'many\' in Ukrainian',
             ]
             ],
             'pl'                =>  [
                 'translation'       =>  [
-                    'key_0'        =>  'Single form in Polish',
-                    'key_1'        =>  'Plural form in Polish',
-                    'key_2'        =>  'Other plural form in Polish',
-                ]
+                    'key_one'        =>  'Single form in Polish',
+                    'key_few'        =>  'Plural form \'few\' in Polish',
+                    'key_many'        =>  'Plural form \'many\' in Polish',
             ]
+            ],
+            'ar'                =>  [
+                'translation'       =>  [
+                    'key_zero'       =>  'Plural form \'zero\'',
+                    'key_one'        =>  'Plural form \'one\'',
+                    'key_two'        =>  'Plural form \'two\'',
+                    'key_few'        =>  'Plural form \'few\'',
+                    'key_many'       =>  'Plural form \'many\'',
+                    'key_other'      =>  'Plural form \'other\'',
+                ]
+            ],
+
     ]
 ]);
 
-echo "Fetching single item in Ukrainian - " . I18n::get()->t('key', ['count' => 1]) . "\n";
+echo "Fetching 1 item in Ukrainian - " . I18n::get()->t('key', ['count' => 1]) . "\n";
 // Outputs "Single form in Ukrainian"
-echo "Fetching plural item in Ukrainian - " . I18n::get()->t('key', ['count' => 2]) . "\n";
-// Outputs "Plural form in Ukrainian"
-echo "Fetching plural item in Ukrainian - " . I18n::get()->t('key', ['count' => 15]) . "\n";
-// Outputs "Other plural form in Ukrainian"
+echo "Fetching 2 items in Ukrainian - " . I18n::get()->t('key', ['count' => 2]) . "\n";
+// Outputs "Plural form 'few' in Ukrainian"
+echo "Fetching 15 items in Ukrainian - " . I18n::get()->t('key', ['count' => 15]) . "\n";
+// Outputs "Plural form 'other' in Ukrainian"
 
 I18n::get()->changeLanguage('pl');
 
-echo "Fetching single item in Polish - " . I18n::get()->t('key', ['count' => 1]) . "\n";
+echo "Fetching 1 item in Polish - " . I18n::get()->t('key', ['count' => 1]) . "\n";
 // Outputs "Single form in Polish"
-echo "Fetching plural item in Polish - " . I18n::get()->t('key', ['count' => 2]) . "\n";
-// Outputs "Plural form in Polish"
-echo "Fetching plural item in Polish - " . I18n::get()->t('key', ['count' => 15]) . "\n";
-// Outputs "Other plural form in Polish"
+echo "Fetching 2 items in Polish - " . I18n::get()->t('key', ['count' => 2]) . "\n";
+// Outputs "Plural form 'few' in Polish"
+echo "Fetching 15 items in Polish - " . I18n::get()->t('key', ['count' => 15]) . "\n";
+// Outputs "Plural form 'other' in Polish"
+
+
+I18n::get()->changeLanguage('ar');
+echo "************ Arabish ************" . "\n";
+echo "Fetching 0 item in Arabish - " . I18n::get()->t('key', ['count' => 0]) . "\n";
+// Outputs "Plural form 'zero'"
+echo "Fetching 1 item in Arabish - " . I18n::get()->t('key', ['count' => 1]) . "\n";
+// Outputs "Plural form 'one'"
+echo "Fetching 2 items in Arabish - " . I18n::get()->t('key', ['count' => 2]) . "\n";
+// Outputs "Plural form 'two'"
+echo "Fetching 3 items in Arabish - " . I18n::get()->t('key', ['count' => 3]) . "\n";
+// Outputs "Plural form 'few'"
+echo "Fetching 11 items in Arabish - " . I18n::get()->t('key', ['count' => 11]) . "\n";
+// Outputs "Plural form 'many'"
+echo "Fetching 100 items in Arabish - " . I18n::get()->t('key', ['count' => 100]) . "\n";
+// Outputs "Plural form 'other'"

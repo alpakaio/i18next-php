@@ -10,10 +10,10 @@ I18n::get([
     'resources'             =>  [
         'en'                =>  [
             'translation'       =>  [
-                'key'               =>  'Single',
-                'key_plural'        =>  'Plural',
-                'keyWCount'         =>  '{{count}} item',
-                'keyWCount_plural'  =>  '{{count}} items'
+                'key_one'          =>  'Single',
+                'key_other'        =>  'Plural',
+                'keyWCount_one'    =>  '{{count}} item',
+                'keyWCount_other'  =>  '{{count}} items'
             ]
         ]
     ]

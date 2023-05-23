@@ -17,6 +17,7 @@ If you find any issues please report them or create a PR.
 * PHP-specific features like interfaces for modules
 * PHP 8.0+ 
 * Automatic language detection support
+* JSON v4 (required)
 
 ### Usage
 
@@ -39,7 +40,7 @@ $i18n = new I18n([
         'en'        =>  [
             'translation'       =>  [
                 'key'           =>  'Value',
-                'key_plural'    =>  'Value plural',
+                'key_other '    =>  'Value plural',
                 'deeper'        =>  [
                     'key'           =>  'Deep value'
                 ]
