@@ -15,8 +15,9 @@ If you find any issues please report them or create a PR.
 * PSR3 logging support (psr/log is a hard requirement, but you're not required to actually use a logger)
 * Extremely similar API to the JS version
 * PHP-specific features like interfaces for modules
-* PHP 7.3+ 
+* PHP 8.0+ 
 * Automatic language detection support
+* JSON v4 (required)
 
 ### Usage
 
@@ -25,6 +26,7 @@ If you find any issues please report them or create a PR.
 * [Basic shared usage through the whole application](examples/example-shared.php)
 * [Basic instancing of translation and separation from shared](examples/example-instance.php)
 * [Basic plural handling](examples/example-plurals.php)
+* [Multi plural handling](examples/example-multi-plurals.php)
 * [Basic language detection](examples/example-detect.php)
 
 ### Basic example
@@ -38,7 +40,7 @@ $i18n = new I18n([
         'en'        =>  [
             'translation'       =>  [
                 'key'           =>  'Value',
-                'key_plural'    =>  'Value plural',
+                'key_other '    =>  'Value plural',
                 'deeper'        =>  [
                     'key'           =>  'Deep value'
                 ]
@@ -56,7 +58,7 @@ $i18n->t('deeper.key'); // "Depp value"
 
 Simply enter your project directory and run
 
-`composer require alpakaio/i18next-php`
+`composer require it-tem-papa/i18next-php`
 
 ### Todo
 

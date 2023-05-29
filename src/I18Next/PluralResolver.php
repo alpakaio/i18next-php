@@ -19,6 +19,7 @@ const SETS = [
         'lngs'  =>  ['ach','ak','am','arn','br','fil','gun','ln','mfe','mg','mi','oc', 'pt', 'pt-BR',
             'tg','ti','tr','uz','wa'],
         'nr'    =>  [1,2],
+        'toCldr' => [1,5],
         'fc'    =>  1
     ],
     [
@@ -28,114 +29,145 @@ const SETS = [
             'ne','nl','nn','no','nso','pa','pap','pms','ps','pt-PT','rm','sco',
             'se','si','so','son','sq','sv','sw','ta','te','tk','ur','yo'],
         'nr'    =>  [1,2],
+        'toCldr' => [1,5],
         'fc'    =>  2
     ],
     [
         'lngs'  =>  ['ay','bo','cgg','fa','id','ja','jbo','ka','kk','km','ko','ky','lo',
             'ms','sah','su','th','tt','ug','vi','wo','zh'],
         'nr'    =>  [1],
+        'toCldr' => [5],
         'fc'    =>  3
     ],
     [
         'lngs'  =>  ['be','bs', 'cnr', 'dz','hr','ru','sr','uk'],
         'nr'    =>  [1,2,5],
+        'toCldr' => [1,3,4],
         'fc'    =>  4
     ],
     [
         'lngs'  =>  ['ar'],
         'nr'    =>  [0,1,2,3,11,100],
+        'toCldr' => [0,1,2,3,4,5],
         'fc'    =>  5
     ],
     [
         'lngs'  =>  ['cs','sk'],
         'nr'    =>  [1,2,5],
+        'toCldr' => [1,3,5],
         'fc'    =>  6
     ],
     [
         'lngs'  =>  ['csb','pl'],
         'nr'    =>  [1,2,5],
+        'toCldr' => [1,3,4],
         'fc'    =>  7
     ],
     [
         'lngs'  =>  ['cy'],
         'nr'    =>  [1,2,3,8],
+        'toCldr' => [1,2,4,5],
         'fc'    =>  8
     ],
     [
         'lngs'  =>  ['fr'],
         'nr'    =>  [1,2],
+        'toCldr' => [1,5],
         'fc'    =>  9
     ],
     [
         'lngs'  =>  ['ga'],
         'nr'    =>  [1,2,3,7,11],
+        'toCldr' => [1,2,3,4,5],
         'fc'    =>  10
     ],
     [
         'lngs'  =>  ['gd'],
         'nr'    =>  [1,2,3,20],
+        'toCldr' => [1,2,3,5],
         'fc'    =>  11
     ],
     [
         'lngs'  => ['is'],
         'nr'    =>  [1,2],
+        'toCldr' => [1,5],
         'fc'    =>  12
     ],
     [
         'lngs'  =>  ['jv'],
         'nr'    =>  [0,1],
+        'toCldr' => [5,5],
         'fc'    =>  13
     ],
     [
         'lngs'  =>  ['kw'],
         'nr'    =>  [1,2,3,4],
+        'toCldr' => [1,2,5,5],
         'fc'    =>  14
     ],
     [
         'lngs'  =>  ['lt'],
         'nr'    =>  [1,2,10],
+        'toCldr' => [1,3,5],
         'fc'    =>  15
     ],
     [
         'lngs'  =>  ['lv'],
         'nr'    =>  [1,2,0],
+        'toCldr' => [1,0,0],
         'fc'    =>  16
     ],
     [
         'lngs'  =>  ['mk'],
         'nr'    =>  [1,2],
+        'toCldr' => [1,5],
         'fc'    =>  17
     ],
     [
         'lngs'  =>  ['mnk'],
         'nr'    =>  [0,1,2],
+        'toCldr' => [0,1,5],
         'fc'    =>  18
     ],
     [
         'lngs'  =>  ['mt'],
         'nr'    =>  [1,2,11,20],
+        'toCldr' => [1,3,4,5],
         'fc'    =>  19
     ],
     [
         'lngs'  =>  ['or'],
         'nr'    =>  [2,1],
+        'toCldr' => [1,5],
         'fc'    =>  2
     ],
     [
         'lngs'  =>  ['ro'],
         'nr'    =>  [1,2,20],
+        'toCldr' => [1,3,5],
         'fc'    =>  20
     ],
     [
         'lngs'  =>  ['sl'],
         'nr'    =>  [5,1,2,3],
+        'toCldr' => [5,1,2,3],
         'fc'    =>  21
     ],
     [
         'lngs'  =>  ['he'],
         'nr'    =>  [1,2,20,21],
+        'toCldr' => [1,2,4,5],
         'fc'    =>  22
     ]
+];
+
+const suffixesOrder = [
+    0 => 'zero' ,
+    1 => 'one'  ,
+    2 => 'two'  ,
+    3 => 'few'  ,
+    4 => 'many' ,
+    5 => 'other',
 ];
 
 /**
@@ -159,28 +191,28 @@ function getRulesForPluralTypes(): array
             return 0;
         },
         4 => function ($n) {
-            return (int)(($n % 10 == 1 && $n % 100 != 11 ? 0 : $n % 10 >= 2 && $n % 10 <= 4 && ($n % 100 < 10 || $n % 100 >= 20)) ? 1 : 2);
+            return (int)(($n % 10 == 1 && $n % 100 != 11) ? 0 : ($n % 10 >= 2 && $n % 10 <= 4 && ($n % 100 < 10 || $n % 100 >= 20) ? 1 : 2));
         },
         5 => function ($n) {
-            return (int)((((($n === 0 ? 0 : $n == 1) ? 1 : $n == 2) ? 2 : $n % 100 >= 3 && $n % 100 <= 10) ? 3 : $n % 100 >= 11) ? 4 : 5);
+            return (int)($n === 0 ? 0 : ($n == 1 ? 1 : ($n == 2 ? 2 : ($n % 100 >= 3 && $n % 100 <= 10 ? 3 : ($n % 100 >= 11 ? 4 : 5)))));
         },
         6 => function ($n) {
-            return (int)((($n == 1) ? 0 : ($n >= 2 && $n <= 4)) ? 1 : 2);
+            return (int)($n == 1 ? 0 : ($n >= 2 && $n <= 4 ? 1 : 2));
         },
         7 => function ($n) {
-            return (int)(($n == 1 ? 0 : $n % 10 >= 2 && $n % 10 <= 4 && ($n % 100 < 10 || $n % 100 >= 20)) ? 1 : 2);
+            return (int)($n == 1 ? 0 : ($n % 10 >= 2 && $n % 10 <= 4 && ($n % 100 < 10 || $n % 100 >= 20) ? 1 : 2));
         },
         8 => function ($n) {
-            return (int)(((($n == 1) ? 0 : ($n == 2)) ? 1 : ($n != 8 && $n != 11)) ? 2 : 3);
+            return (int)($n == 1 ? 0 : ($n == 2 ? 1 : ($n != 8 && $n != 11 ? 2 : 3)));
         },
         9 => function ($n) {
             return (int)($n >= 2);
         },
         10 => function ($n) {
-            return (int)(((($n == 1 ? 0 : $n == 2) ? 1 : $n < 7) ? 2 : $n < 11) ? 3 : 4);
+            return (int)($n == 1 ? 0 : ($n == 2 ? 1 : ($n < 7 ? 2 : ($n < 11 ? 3 : 4))));
         },
         11 => function ($n) {
-            return (int)(((($n == 1 || $n == 11) ? 0 : ($n == 2 || $n == 12)) ? 1 : ($n > 2 && $n < 20)) ? 2 : 3);
+            return (int)($n == 1 || $n == 11 ? 0 : ($n == 2 || $n == 12 ? 1 : ($n > 2 && $n < 20 ? 2 : 3)));
         },
         12 => function ($n) {
             return (int)($n % 10 != 1 || $n % 100 == 11);
@@ -189,31 +221,31 @@ function getRulesForPluralTypes(): array
             return (int)($n !== 0);
         },
         14 => function ($n) {
-            return (int)(((($n == 1) ? 0 : ($n == 2)) ? 1 : ($n == 3)) ? 2 : 3);
+            return (int)($n == 1 ? 0 : ($n == 2 ? 1 : ($n == 3 ? 2 : 3)));
         },
         15 => function ($n) {
-            return (int)(($n % 10 == 1 && $n % 100 != 11 ? 0 : $n % 10 >= 2 && ($n % 100 < 10 || $n % 100 >= 20)) ? 1 : 2);
+            return (int)($n % 10 == 1 && $n % 100 != 11 ? 0 : ($n % 10 >= 2 && ($n % 100 < 10 || $n % 100 >= 20) ? 1 : 2));
         },
         16 => function ($n) {
-            return (int)(($n % 10 == 1 && $n % 100 != 11 ? 0 : $n !== 0) ? 1 : 2);
+            return (int)($n % 10 == 1 && $n % 100 != 11 ? 0 : ($n !== 0 ? 1 : 2));
         },
         17 => function ($n) {
             return (int)($n == 1 || $n % 10 == 1 ? 0 : 1);
         },
         18 => function ($n) {
-            return (int)(($n == 0 ? 0 : $n == 1) ? 1 : 2);
+            return (int)($n == 0 ? 0 : ($n == 1 ? 1 : 2));
         },
         19 => function ($n) {
-            return (int)((($n == 1 ? 0 : $n === 0 || ($n % 100 > 1 && $n % 100 < 11)) ? 1 : ($n % 100 > 10 && $n % 100 < 20)) ? 2 : 3);
+            return (int)($n== 1 ? 0 : ($n === 0 || ($n % 100 > 1 && $n % 100 < 11) ? 1 : ($n % 100 > 10 && $n % 100 < 20 ? 2 : 3)));
         },
         20 => function ($n) {
-            return (int)(($n == 1 ? 0 : ($n === 0 || ($n % 100 > 0 && $n % 100 < 20))) ? 1 : 2);
+            return (int)($n == 1 ? 0 : ($n === 0 || ($n % 100 > 0 && $n % 100 < 20) ? 1 : 2));
         },
         21 => function ($n) {
-            return (int)((($n % 100 == 1 ? 1 : $n % 100 == 2) ? 2 : $n % 100 == 3 || $n % 100 == 4) ? 3 : 0);
+            return (int)($n % 100 == 1 ? 1 : ($n % 100 == 2 ? 2 : ($n % 100 == 3 || $n % 100 == 4 ? 3 : 0)));
         },
         22 => function ($n) {
-            return (int)((($n === 1 ? 0 : $n === 2) ? 1 : ($n < 0 || $n > 10) && $n % 10 == 0) ? 2 : 3);
+            return (int)($n === 1 ? 0 : ($n === 2 ? 1 : (($n < 0 || $n > 10) && $n % 10 == 0 ? 2 : 3)));
         }
     ];
 }
@@ -230,7 +262,8 @@ function createRules() {
         foreach ($set['lngs'] as $l) {
             $rules[$l] = [
                 'numbers'   =>  $set['nr'],
-                'plurals'   =>  $rPluralTypes[$set['fc']]
+                'plurals'   =>  $rPluralTypes[$set['fc']],
+                'toCldr'    => $set['toCldr']
             ];
         }
     }
@@ -353,19 +386,20 @@ class PluralResolver {
         if ($rule) {
             $idx = call_user_func($rule['plurals'], abs($count));
             $suffix = $rule['numbers'][$idx];
+            $multiPluralSuffix = $rule['toCldr'][$idx];
 
             // special treatment for lngs only having singular and plural
             if (($this->_options['simplifyPluralSuffix'] ?? true) && count($rule['numbers']) === 2 && $rule['numbers'][0] === 1) {
                 if ($suffix === 2)
-                    $suffix = 'plural';
+                    $suffix = 'other';
                 else if ($suffix === 1)
-                    $suffix = '';
+                    $suffix = 'one';
             }
 
             if (($this->_options['simplifyPluralSuffix'] ?? true) && count($rule['numbers']) === 2 && $rule['numbers'][0] === 1)
                 return ($this->_options['prepend'] ?? '') . $suffix;
 
-            return ($this->_options['prepend'] ?? '') . $idx;
+            return ($this->_options['prepend'] ?? '') .  suffixesOrder[$multiPluralSuffix];
         }
 
         $this->_logger->warning('No plural rule found for '.$code);
